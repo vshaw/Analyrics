@@ -1,7 +1,10 @@
-function analyzeLyrics(lyrics) {
+console.log("in indico");
+var indico = require('indico.io');
+
+var analyzeLyrics = function (lyrics) {
 	console.log("loaded!");
 
-	var happyKeywords = ["happ", "sun", "good", "smile", "best", "love" ];
+	var happyKeywords = ["happy", "sun", "good", "smile", "best", "love" ];
 	var sadKeywords = ["sad", "cry", "tear", "sorry", "last", "miss", "alone", "lonely", "broken"];
 	var angryKeywords = ["angry", "hell", "edge", "die", "done", "shit", "fuck", "lies", "bitch"];
 	var calmKeywords = ["calm", "relax", "easy", "chill", "alright", "great"];
@@ -37,7 +40,6 @@ function analyzeLyrics(lyrics) {
 	console.log("angryscore: " + angryScore);
 	console.log("calmScore: " + calmScore);
 
-
 	if(happyScore == Math.max(happyScore, sadScore, angryScore, calmScore) && happyScore!= sadScore && happyScore!=angryScore && happyScore!=calmScore) {
 		console.log("HAPPY!");
 	}
@@ -57,12 +59,8 @@ function analyzeLyrics(lyrics) {
 		console.log("Unclear");
 	}
 
-	//module.exports = function(app){ 
 
-		console.log("hello indico");
-
-	var indico = require('indico.io');
-	indico.apiKey = 'b0a54870910f47e8fefc22dcac835ecd';
+	indico.apiKey = '4be98c072e551fca01ffe06337bcfce1';
 
 	indico.sentiment(lyrics)
   	.then(function(res) {
@@ -72,7 +70,6 @@ function analyzeLyrics(lyrics) {
   });
 
 //}
-
 }
 analyzeLyrics("I wake up every evening With a big smile on my face");
 

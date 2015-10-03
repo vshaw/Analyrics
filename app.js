@@ -10,6 +10,8 @@ var users = require('./routes/users');
 
 var app = express();
 
+//console.log('in app');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -46,6 +48,14 @@ if (app.get('env') === 'development') {
   });
 }
 
+app.use('/static', express.static(__dirname + '/public'));
+var html_dir = './html/';
+
+app.get('/', function(req, res) {
+  console.log("sending index");
+  res.sendfile(html_dir + 'index.html');
+});
+
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
@@ -55,6 +65,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+app.listen(8000);
 
 
 module.exports = app;
