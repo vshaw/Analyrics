@@ -1,13 +1,7 @@
-console.log("in indico");
-var indico = require('indico.io');
+var analyzeLyrics = function (lyrics) {
 
-
-var songScore = new Object(); 
-
-var analyzeLyrics = function (songName, artist, lyrics) {
-
-	songScore.artist = artist; 
-	songScore.songName = songName;
+//	songScore.artist = artist;
+//	songScore.songName = songName;
 
 	console.log("loaded!");
 
@@ -16,30 +10,30 @@ var analyzeLyrics = function (songName, artist, lyrics) {
 	var angryKeywords = ["angry", "hell", "edge", "die", "done", "shit", "fuck", "lies", "bitch"];
 	var calmKeywords = ["calm", "relax", "easy", "chill", "alright", "great"];
 
-	var happyScore = 0; 
+	var happyScore = 0;
 	var sadScore = 0;
-	var angryScore = 0; 
+	var angryScore = 0;
 	var calmScore = 0;
 
-	//coutns number 
+	//coutns number
 	for(i = 0; i < happyKeywords.length; i++) {
 		var count = (lyrics.match(new RegExp(happyKeywords[i], "g")) || []).length;
-		happyScore = happyScore + count;  
+		happyScore = happyScore + count;
 	}
 
 	for(i = 0; i < sadKeywords.length; i++) {
 		var count = (lyrics.match(new RegExp(sadKeywords[i], "g")) || []).length;
-		sadScore = sadScore + count;  
+		sadScore = sadScore + count;
 	}
 
 	for(i = 0; i < angryKeywords.length; i++) {
 		var count = (lyrics.match(new RegExp(angryKeywords[i], "g")) || []).length;
-		angryScore = angryScore + count;  
+		angryScore = angryScore + count;
 	}
 
 	for(i = 0; i < calmKeywords.length; i++) {
 		var count = (lyrics.match(new RegExp(calmKeywords[i], "g")) || []).length;
-		calmScore = calmScore + count;  
+		calmScore = calmScore + count;
 	}
 
 	console.log("happyscore: " + happyScore);
@@ -47,36 +41,45 @@ var analyzeLyrics = function (songName, artist, lyrics) {
 	console.log("angryscore: " + angryScore);
 	console.log("calmScore: " + calmScore);
 
-	songScore.happyScore = happyScore; 
-	songScore.sadScore = sadScore; 
-	songScore.angryScore = angryScore; 
-	songScore.calmScore = calmScore; 
+	analyzeLyrics.happyScore = happyScore;
+	analyzeLyrics.sadScore = sadScore;
+	analyzeLyrics.angryScore = angryScore;
+	analyzeLyrics.calmScore = calmScore;
 
 	if(happyScore == Math.max(happyScore, sadScore, angryScore, calmScore) && happyScore!= sadScore && happyScore!=angryScore && happyScore!=calmScore) {
 		console.log("HAPPY!");
-		songScore.emotion = "happy"; 
+	//	songScore.emotion = "happy";
+	analyzeLyrics.emotion = "Happy";
+	//	return "Happy!";
 	}
 
 	else if(sadScore == Math.max(happyScore, sadScore, angryScore, calmScore) && sadScore!= happyScore && sadScore!=angryScore && sadScore!=calmScore) {
 		console.log("SAD!");
-		songScore.emotion = "sad"; 
+		analyzeLyrics.emotion = "Sad";
+	//	return "Sad";
 	}
 
 	else if(calmScore == Math.max(happyScore, sadScore, angryScore, calmScore) && calmScore!= sadScore && calmScore!=angryScore && happyScore!=calmScore) {
 		console.log("CALM!");
-		songScore.emotion = "calm"; 
+
+		analyzeLyrics.emotion = "Calm";
+		//return "Calm";
 	}
 
 	else if(angryScore == Math.max(happyScore, sadScore, angryScore, calmScore) && angryScore!= sadScore && happyScore!=angryScore && angryScore!=calmScore) {
 		console.log("ANGRY!");
-		songScore.emotion = "angry"; 
+
+		analyzeLyrics.emotion = "Angry";
+	//	return "Angry";
 	}
 	else {
 		console.log("Unclear");
+		analyzeLyrics.emotion = "Unclear";
+	//	return "Unclear"
 	}
 
-
-	indico.apiKey = '4be98c072e551fca01ffe06337bcfce1';
+	return analyzeLyrics; 
+	/*indico.apiKey = '4be98c072e551fca01ffe06337bcfce1';
 
 	indico.sentiment(lyrics)
   	.then(function(res) {
@@ -87,8 +90,5 @@ var analyzeLyrics = function (songName, artist, lyrics) {
 
 //} */
 }
-analyzeLyrics("Gives You Hell", "All-American Rejects", "I wake up every evening With a big smile on my face hell hell hell");
-console.log(songScore.angryScore);
-
-
-
+//analyzeLyrics("Gives You Hell", "All-American Rejects", "I wake up every evening With a big smile on my face hell hell hell");
+//console.log(songScore.angryScore);

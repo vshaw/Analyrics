@@ -4,7 +4,6 @@
 <head>
 
     <script src="../Chart.js/Chart.js"></script>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -86,8 +85,26 @@
     <section id="services" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
+
+
                 <div class="col-lg-10 col-lg-offset-1">
                     <h2>Mood Chooser</h2>
+
+
+</br>
+
+<input type="text" id="lyrics">
+
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+
+
+
+
+
+
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
@@ -101,9 +118,8 @@
                                 </h4>
                                 <p>Skipping through a field of rainbows.</p>
 
-                                <a data-toggle="modal" data-target="#myModal1">
-                                  <src class="btn btn-light">Choose Me</a>
-                                </a>
+                                <p id="happy"></p>
+
 
                                 <!-- Modal -->
                                 <div id="myModal1" class="modal fade" role="dialog">
@@ -144,7 +160,7 @@
                                     <strong>Sad</strong>
                                 </h4>
                                 <p>Drowning in a pool of tears.</p>
-                                <a href="#" class="btn btn-light">Choose Me</a>
+                                <p id="sad"></p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -157,7 +173,7 @@
                                     <strong>Angry</strong>
                                 </h4>
                                 <p>About to boil over.</p>
-                                <a href="#" class="btn btn-light">Choose Me</a>
+                                <p id="angry"></p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -170,7 +186,7 @@
                                     <strong>Calm</strong>
                                 </h4>
                                 <p>Cool as a cucumber.</p>
-                                <a href="#" class="btn btn-light">Choose Me</a>
+                                <p id="calm"></p>
                             </div>
                         </div>
 
@@ -364,6 +380,41 @@
         });
     });
     </script>
+
+
+    <script src="../analyzeLyrics.js"></script>
+
+    <script>
+    function myFunction() {
+       var lyrics = document.getElementById("lyrics").value;
+       var emotion = analyzeLyrics(lyrics);
+       document.getElementById("demo").innerHTML = emotion.emotion;
+       document.getElementById("happy").innerHTML = "Score: " + emotion.happyScore;
+       document.getElementById("sad").innerHTML = "Score: " + emotion.sadScore;
+       document.getElementById("angry").innerHTML = "Score: " + emotion.angryScore;
+       document.getElementById("calm").innerHTML = "Score: " + emotion.calmScore;
+    }
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
+
+    <script>
+    if (annyang) {
+      // Let's define a command.
+      var commands = {
+        'analyze': myFunction }
+      };
+
+  // Add our commands to annyang
+  annyang.addCommands(commands);
+
+  // Start listening.
+  annyang.start();
+}
+</script>
+
+
+
 
 </body>
 
