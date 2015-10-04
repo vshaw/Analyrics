@@ -358,7 +358,7 @@
     if (annyang) {
       // Let's define a command.
       var commands = {
-        'analyze': myFunction };
+        'analyze': myFunction() };
       
 
     // Add our commands to annyang
@@ -366,6 +366,16 @@
 
     // Start listening.
     annyang.start();
+    }
+
+      function myFunction() {
+       var lyrics = document.getElementById("lyrics").value;
+       var emotion = analyzeLyrics(lyrics);
+       document.getElementById("demo").innerHTML = emotion.emotion;
+       document.getElementById("happy").innerHTML = "Score: " + emotion.happyScore;
+       document.getElementById("sad").innerHTML = "Score: " + emotion.sadScore;
+       document.getElementById("angry").innerHTML = "Score: " + emotion.angryScore;
+       document.getElementById("calm").innerHTML = "Score: " + emotion.calmScore;
     }
 </script>
 
