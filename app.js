@@ -7,6 +7,11 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var analyzeLyrics = require('./analyzeLyrics.js');
+var song = require('./db/songSchema.js');
+
+var mongoose = require('mongoose');
+var db = mongoose.connection;
 
 var app = express();
 
@@ -52,8 +57,18 @@ app.use('/static', express.static(__dirname + '/public'));
 var html_dir = './html/';
 
 app.get('/', function(req, res) {
-  console.log("sending index");
+  console.log("got index");
   res.sendfile(html_dir + 'index.html');
+});
+
+app.get('/foo', function(req,res,next){
+  console.log(req);
+  console.log("got request at foo");
+  console.log()
+  song.find({}).lean().exec( function(err, results){
+    console.log(results);
+    res.send(results);
+  });
 });
 
 // production error handler
@@ -65,6 +80,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 app.listen(8000);
 
