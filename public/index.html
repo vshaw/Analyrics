@@ -3,6 +3,8 @@
 
 <head>
 
+    <script src="../Chart.js/Chart.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,7 +33,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
@@ -48,12 +49,6 @@
             </li>
             <li>
                 <a href="#services" onclick = $("#menu-close").click(); >MoodChooser</a>
-            </li>
-            <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >Artists and Emotion</a>
-            </li>
-            <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
             </li>
         </ul>
     </nav>
@@ -105,7 +100,38 @@
                                     <strong>Happy</strong>
                                 </h4>
                                 <p>Skipping through a field of rainbows.</p>
-                                <a href="#" class="btn btn-light">Choose Me</a>
+
+                                <a data-toggle="modal" data-target="#myModal1">
+                                  <src class="btn btn-light">Choose Me</a>
+                                </a>
+
+                                <!-- Modal -->
+                                <div id="myModal1" class="modal fade" role="dialog">
+                                  <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Happy</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <p>Hello, content</p>
+                                        <div id="canvas-holder">
+                                              <canvas id="chart-area" width="300" height="300"/>
+                                            </div>
+
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+
+
+
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -147,19 +173,7 @@
                                 <a href="#" class="btn btn-light">Choose Me</a>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <span class="icon-customexcite"></span>
-                            </span>
-                                <h4>
-                                    <strong>Excited</strong>
-                                </h4>
-                                <p>Can.  Not.  Wait.</p>
-                                <a href="#" class="btn btn-light">Choose Me</a>
-                            </div>
-                        </div>
+
                     </div>
                     <!-- /.row (nested) -->
                 </div>
@@ -170,14 +184,13 @@
         <!-- /.container -->
     </section>
 
-    <!-- Callout -->
+    <!-- Callout
     <aside class="callout">
         <div class="text-vertical-center">
             <h1>Artists and Emotion</h1>
         </div>
     </aside>
 
-    <!-- Portfolio -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="row">
@@ -222,7 +235,7 @@
         <!-- /.container -->
     </section>
 
-    <!-- Call to Action -->
+    <!-- Call to Action
     <aside class="call-to-action bg-primary">
         <div class="container">
             <div class="row">
@@ -233,20 +246,11 @@
                 </div>
             </div>
         </div>
-    </aside>
+    </aside> -->
 
-    <!-- Map
-    <section id="contact" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small>
-            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-        </small>
-        </iframe>
-    </section>
-    -->
 
-    <!-- Footer -->
+
+
     <footer>
         <div class="container">
             <div class="row">
@@ -277,6 +281,51 @@
             </div>
         </div>
     </footer>
+
+
+
+    <script>
+
+    var pieData = [
+      {
+        value: 300,
+        color:"#F7464A",
+        highlight: "#FF5A5E",
+        label: "Red"
+      },
+      {
+        value: 50,
+        color: "#46BFBD",
+        highlight: "#5AD3D1",
+        label: "Green"
+      },
+      {
+        value: 100,
+        color: "#FDB45C",
+        highlight: "#FFC870",
+        label: "Yellow"
+      },
+      {
+        value: 40,
+        color: "#949FB1",
+        highlight: "#A8B3C5",
+        label: "Grey"
+      },
+      {
+        value: 120,
+        color: "#4D5360",
+        highlight: "#616774",
+        label: "Dark Grey"
+      }
+
+    ];
+
+    window.onload = function(){
+      var ctx = document.getElementById("chart-area").getContext("2d");
+      window.myPie = new Chart(ctx).Pie(pieData);
+    };
+
+    </script>
 
     <!-- jQuery -->
     <script src="stylesheets/startbootstrap-stylish-portfolio-1.0.3/js/jquery.js"></script>

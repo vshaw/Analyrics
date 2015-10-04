@@ -1,7 +1,14 @@
 console.log("in indico");
 var indico = require('indico.io');
 
-var analyzeLyrics = function (lyrics) {
+
+var songScore = new Object(); 
+
+var analyzeLyrics = function (songName, artist, lyrics) {
+
+	songScore.artist = artist; 
+	songScore.songName = songName;
+
 	console.log("loaded!");
 
 	var happyKeywords = ["happy", "sun", "good", "smile", "best", "love" ];
@@ -40,20 +47,29 @@ var analyzeLyrics = function (lyrics) {
 	console.log("angryscore: " + angryScore);
 	console.log("calmScore: " + calmScore);
 
+	songScore.happyScore = happyScore; 
+	songScore.sadScore = sadScore; 
+	songScore.angryScore = angryScore; 
+	songScore.calmScore = calmScore; 
+
 	if(happyScore == Math.max(happyScore, sadScore, angryScore, calmScore) && happyScore!= sadScore && happyScore!=angryScore && happyScore!=calmScore) {
 		console.log("HAPPY!");
+		songScore.emotion = "happy"; 
 	}
 
 	else if(sadScore == Math.max(happyScore, sadScore, angryScore, calmScore) && sadScore!= happyScore && sadScore!=angryScore && sadScore!=calmScore) {
 		console.log("SAD!");
+		songScore.emotion = "sad"; 
 	}
 
 	else if(calmScore == Math.max(happyScore, sadScore, angryScore, calmScore) && calmScore!= sadScore && calmScore!=angryScore && happyScore!=calmScore) {
 		console.log("CALM!");
+		songScore.emotion = "calm"; 
 	}
 
 	else if(angryScore == Math.max(happyScore, sadScore, angryScore, calmScore) && angryScore!= sadScore && happyScore!=angryScore && angryScore!=calmScore) {
 		console.log("ANGRY!");
+		songScore.emotion = "angry"; 
 	}
 	else {
 		console.log("Unclear");
@@ -69,9 +85,10 @@ var analyzeLyrics = function (lyrics) {
     console.warn(err);
   });
 
-//}
+//} */
 }
-analyzeLyrics("I wake up every evening With a big smile on my face");
+analyzeLyrics("Gives You Hell", "All-American Rejects", "I wake up every evening With a big smile on my face hell hell hell");
+console.log(songScore.angryScore);
 
 
 
