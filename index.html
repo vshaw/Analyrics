@@ -3,7 +3,6 @@
 
 <head>
 
-    <script src="../Chart.js/Chart.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -300,49 +299,6 @@
 
 
 
-    <script>
-
-    var pieData = [
-      {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      },
-      {
-        value: 40,
-        color: "#949FB1",
-        highlight: "#A8B3C5",
-        label: "Grey"
-      },
-      {
-        value: 120,
-        color: "#4D5360",
-        highlight: "#616774",
-        label: "Dark Grey"
-      }
-
-    ];
-
-    window.onload = function(){
-      var ctx = document.getElementById("chart-area").getContext("2d");
-      window.myPie = new Chart(ctx).Pie(pieData);
-    };
-
-    </script>
-
     <!-- jQuery -->
     <script src="stylesheets/startbootstrap-stylish-portfolio-1.0.3/js/jquery.js"></script>
 
@@ -402,15 +358,15 @@
     if (annyang) {
       // Let's define a command.
       var commands = {
-        'analyze': myFunction }
-      };
+        'analyze': myFunction };
+      
 
-  // Add our commands to annyang
-  annyang.addCommands(commands);
+    // Add our commands to annyang
+    annyang.addCommands(commands);
 
-  // Start listening.
-  annyang.start();
-}
+    // Start listening.
+    annyang.start();
+    }
 </script>
 
 
